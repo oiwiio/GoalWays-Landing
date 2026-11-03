@@ -10,6 +10,12 @@
   var title = document.getElementById('panel-title');
   var text = document.getElementById('panel-text');
   var panel = document.getElementById('panel');
+  var shots = document.querySelectorAll('.phone--sm .phone__img');
+  shots.forEach(function (s) {
+    function miss() { s.classList.add('is-missing'); }
+    s.addEventListener('error', miss);
+    if (s.complete && s.naturalWidth === 0) miss();
+  });
   function select(i) {
     tabs.forEach(function (t, k) {
       var on = k === i;
@@ -19,6 +25,10 @@
     });
     title.textContent = steps[i][0];
     text.textContent = steps[i][1];
+    shots.forEach(function (s, k) {
+      s.classList.toggle('is-active', k === i);
+      s.setAttribute('aria-hidden', k !== i);
+    });
     panel.classList.remove('swap'); void panel.offsetWidth; panel.classList.add('swap');
   }
   tabs.forEach(function (t, i) {
