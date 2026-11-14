@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -21,7 +22,6 @@
     </nav>
   </header>
 
-  <main>
   <section class="hero container" id="home">
     <div class="hero__text">
       <h1>Goal Ways - умный помощник в достижении целей</h1>
@@ -39,19 +39,20 @@
   </section>
 </div>
 
+<main>
 <section class="solution container" id="solution">
-  <span class="eyebrow">Почему Goal Ways?</span>
-  <h2>Прокрастинация мешает жить?<br>Мы знаем решение</h2>
-  <p class="lead">Откладывать дела легко, а вот начать - сложно. Ручное планирование требует времени и сил, а без структуры и правильной постановки целей энтузиазм быстро гаснет. Goal Ways делает иначе:</p>
+  <span class="eyebrow" data-reveal>Почему Goal Ways?</span>
+  <h2 data-reveal style="--d:.1s">Прокрастинация мешает жить?<br>Мы знаем решение</h2>
+  <p class="lead" data-reveal style="--d:.2s">Откладывать дела легко, а вот начать - сложно. Ручное планирование требует времени и сил, а без структуры и правильной постановки целей энтузиазм быстро гаснет. Goal Ways делает иначе:</p>
   <ul class="cards">
-    <li class="card"><span class="ico" aria-hidden="true">⏻</span><h3>Быстрый старт</h3><p>ИИ помогает сформулировать цель за секунды.</p></li>
-    <li class="card"><span class="ico" aria-hidden="true">✓</span><h3>Задачи</h3><p>Делите цель на конкретные действия и отмечайте выполненное по пути.</p></li>
-    <li class="card"><span class="ico" aria-hidden="true">≡</span><h3>Порядок</h3><p>Настройки и фильтры помогают фокусироваться на главном.</p></li>
+    <li class="card" data-reveal style="--d:0s"><span class="ico" aria-hidden="true">⏻</span><h3>Быстрый старт</h3><p>ИИ помогает сформулировать цель за секунды.</p></li>
+    <li class="card" data-reveal style="--d:.12s"><span class="ico" aria-hidden="true">✓</span><h3>Задачи</h3><p>Делите цель на конкретные действия и отмечайте выполненное по пути.</p></li>
+    <li class="card" data-reveal style="--d:.24s"><span class="ico" aria-hidden="true">≡</span><h3>Порядок</h3><p>Настройки и фильтры помогают фокусироваться на главном.</p></li>
   </ul>
 </section>
 
 <section class="steps-wrap">
-  <div class="steps container" aria-labelledby="steps-title">
+  <div class="steps container" data-reveal aria-labelledby="steps-title">
     <h2 id="steps-title" class="sr">Три шага до первой цели</h2>
     <div class="steps__body">
       <div class="tabs" role="tablist" aria-label="Шаги">
@@ -77,7 +78,7 @@
 </section>
 
 <section class="cta" id="start">
-  <div class="cta__card container">
+  <div class="cta__card container" data-reveal>
     <span class="eyebrow">Готов начать?</span>
     <h2>Стань одним из первых<br>пользователей Goal Ways</h2>
     <p>MVP готов к работе. Твой прогресс начинается с одного клика.</p>
@@ -90,7 +91,7 @@
 </section>
 </main>
 
-<footer class="footer container">
+<footer class="footer container" data-reveal>
   <div class="footer__brand">
     <a class="logo logo--lg" href="#home"><img src="assets/logo.svg" alt="" width="40" height="40"><span>Goal Ways</span></a>
     <p>Платформа для личных целей и прогресса. Версия MVP.</p>

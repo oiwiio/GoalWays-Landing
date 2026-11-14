@@ -16,7 +16,23 @@
     s.addEventListener('error', miss);
     if (s.complete && s.naturalWidth === 0) miss();
   });
+
+  var current = 0, timer = null, manual = false, visible = false;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  panel.setAttribute('aria-live', 'off');
+  function stop() { clearInterval(timer); timer = null; }
+  function start() {
+    if (reduce || manual || timer || !visible) return;
+    timer = setInterval(function () { select((current + 1) % tabs.length); }, 5000);
+  }
+  function user(i) {
+    manual = true; stop();
+    panel.setAttribute('aria-live', 'polite');
+    select(i);
+  }
+
   function select(i) {
+    current = i;
     tabs.forEach(function (t, k) {
       var on = k === i;
       t.classList.toggle('is-active', on);
@@ -31,17 +47,29 @@
     });
     panel.classList.remove('swap'); void panel.offsetWidth; panel.classList.add('swap');
   }
+  
   tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { select(i); });
+    t.addEventListener('click', function () { user(i); });
     t.addEventListener('keydown', function (e) {
       var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null;
       if (n === null) return;
       n = (n + tabs.length) % tabs.length;
-      select(n); tabs[n].focus();
+      user(n); tabs[n].focus();
     });
   });
   select(0);
   panel.classList.remove('swap');
+
+  var stepsEl = document.querySelector('.steps');
+  if ('IntersectionObserver' in window && stepsEl) {
+    new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) { start(); } else { stop(); }
+    }, { threshold: 0.5 }).observe(stepsEl);
+    stepsEl.addEventListener('mouseenter', stop);
+    stepsEl.addEventListener('mouseleave', start);
+    stepsEl.addEventListener('focusin', stop);
+  }
 
   var items = document.querySelectorAll('[data-reveal]');
   if (!('IntersectionObserver' in window)) {

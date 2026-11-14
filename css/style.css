@@ -530,3 +530,27 @@ h2 {
 .phone--sm .phone__img{position:absolute;inset:0;opacity:0;transition:opacity .4s ease}
 .phone--sm .phone__img.is-active{opacity:1}
 .phone--sm .phone__img.is-missing{display:none}
+
+
+/* анимации v2 */
+@keyframes drift-a{to{transform:translate(120px,-50px) scale(1.2)}}
+@keyframes drift-b{to{transform:translate(-110px,70px) scale(1.15)}}
+.hero-wrap{position:relative;overflow:hidden}
+.hero-wrap>*{position:relative;z-index:1}
+.hero-wrap::before,.hero-wrap::after{content:"";position:absolute;width:min(520px,80vw);aspect-ratio:1;border-radius:50%;filter:blur(40px);pointer-events:none;z-index:0}
+.hero-wrap::before{left:-8%;top:20%;background:radial-gradient(circle,rgba(176,140,255,.55),transparent 65%);animation:drift-a 16s ease-in-out infinite alternate}
+.hero-wrap::after{right:-8%;top:-6%;background:radial-gradient(circle,rgba(96,54,230,.5),transparent 65%);animation:drift-b 19s ease-in-out infinite alternate}
+
+.nav a{position:relative}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;border-radius:2px;background:#6d3df0;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.nav a:hover::after,.nav a:focus-visible::after{transform:scaleX(1)}
+
+.btn{position:relative;overflow:hidden}
+.btn--primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s ease}
+.btn--primary:hover::after{transform:translateX(120%)}
+
+.tabs button{transition:background .2s,color .2s,transform .2s}
+.tabs button:hover{transform:scale(1.12)}
+.phone--sm .phone__img{transform:scale(.96) translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.phone--sm .phone__img.is-active{opacity:1;transform:none}
+.steps .phone--sm{animation:float 8s ease-in-out infinite}
