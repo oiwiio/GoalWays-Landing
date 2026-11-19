@@ -60,6 +60,28 @@
   select(0);
   panel.classList.remove('swap');
 
+  // полоса прогресса прокрутки
+  var bar = document.querySelector('.progress'), ticking = false;
+  function progress() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (bar) bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, window.scrollY / h) : 0) + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(progress); }
+  }, { passive: true });
+  progress();
+
+  // подсветка карточек за курсором
+  var cardsEl = document.querySelector('.cards');
+  if (cardsEl) cardsEl.addEventListener('pointermove', function (e) {
+    var c = e.target.closest('.card');
+    if (!c) return;
+    var r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+
   var stepsEl = document.querySelector('.steps');
   if ('IntersectionObserver' in window && stepsEl) {
     new IntersectionObserver(function (es) {

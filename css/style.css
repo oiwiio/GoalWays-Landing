@@ -554,3 +554,45 @@ h2 {
 .phone--sm .phone__img{transform:scale(.96) translateY(10px);transition:opacity .5s ease,transform .5s ease}
 .phone--sm .phone__img.is-active{opacity:1;transform:none}
 .steps .phone--sm{animation:float 8s ease-in-out infinite}
+
+
+/* анимации v3 */
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes ring{
+  0%{box-shadow:0 8px 24px rgba(109,61,240,.45),0 0 0 0 rgba(109,61,240,.55)}
+  70%,100%{box-shadow:0 8px 24px rgba(109,61,240,.45),0 0 0 16px rgba(109,61,240,0)}
+}
+
+/* полоса прогресса прокрутки */
+.progress{position:fixed;top:0;left:0;width:100%;height:3px;z-index:50;pointer-events:none;background:linear-gradient(90deg,#8f6bff,#6d3df0);transform:scaleX(0);transform-origin:left}
+
+/* телефон в hero + плавающие бейджи */
+.hero__visual{position:relative;justify-self:center;animation:rise .9s .3s ease-out backwards,float 7s 1.3s ease-in-out infinite}
+.chip{position:absolute;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:14px;background:rgba(255,255,255,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.8);box-shadow:0 12px 30px rgba(40,20,110,.28);color:#16112a;font-size:11px;font-weight:600;white-space:nowrap}
+.chip i{width:8px;height:8px;border-radius:50%;background:#6d3df0;box-shadow:0 0 0 4px rgba(109,61,240,.18)}
+.chip--1{left:-64px;top:16%;animation:rise .8s .9s ease-out backwards,bob 6s 1.7s ease-in-out infinite}
+.chip--2{right:-56px;top:46%;animation:rise .8s 1.15s ease-out backwards,bob 7s 2.2s ease-in-out infinite reverse}
+.chip--3{left:-40px;bottom:10%;animation:rise .8s 1.4s ease-out backwards,bob 8s 2.6s ease-in-out infinite}
+
+/* пульсирующий «ореол» на главных кнопках */
+.hero__text>.btn{animation:rise .8s .45s ease-out backwards,ring 3.4s 1.6s ease-out infinite}
+.cta .btn--primary{animation:ring 3.4s ease-out infinite}
+
+/* подсветка карточки за курсором */
+.card{position:relative;overflow:hidden}
+.card>*{position:relative}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(143,107,255,.24),transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+@media (hover:hover){.card:hover::before{opacity:1}}
+
+/* подчёркивание в заголовке «рисуется» при появлении */
+.hl{padding-bottom:4px;background:linear-gradient(#8f6bff,#6d3df0) no-repeat 0 100%/100% 3px}
+.js .hl{background-size:0 3px;transition:background-size .9s .5s ease}
+.js [data-reveal].is-in .hl{background-size:100% 3px}
+
+@media (max-width:768px){
+  .chip{font-size:10px;padding:7px 11px}
+  .chip--1{left:-18px}
+  .chip--2{right:-18px}
+  .chip--3{left:-8px}
+}
+@media (max-width:420px){.chip--3{display:none}}
